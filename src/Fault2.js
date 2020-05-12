@@ -166,8 +166,8 @@ class Fault2 extends Component {
                     </ul>
                 </Card.Text>
                 <Card.Body>
-                  <Button variant='secondary' onClick={() => this.handleClickRand1()}>rand1</Button>
-                  <Button variant='secondary' onClick={() => this.handleClickRand2()}>rand2</Button>
+                  <Button variant='warning' onClick={() => this.handleClickRand1()}>rand1</Button>
+                  <Button variant='warning' onClick={() => this.handleClickRand2()}>rand2</Button>
                   <Button variant='success' onClick={() => this.handleClickDefault()}>default</Button>
                   <Button variant='primary' onClick={() => this.handleClickLoad()}>load</Button>
                 </Card.Body>
@@ -199,8 +199,8 @@ class Fault2 extends Component {
                     Press load button to see something here
                 </Card.Text>
                 <Card.Body>
-                  <Button variant='secondary' onClick={() => this.handleClickRand1()}>rand1</Button>
-                  <Button variant='secondary' onClick={() => this.handleClickRand2()}>rand2</Button>
+                  <Button variant='warning' onClick={() => this.handleClickRand1()}>rand1</Button>
+                  <Button variant='warning' onClick={() => this.handleClickRand2()}>rand2</Button>
                   <Button variant='success' onClick={() => this.handleClickDefault()}>default</Button>
                   <Button variant='primary' onClick={() => this.handleClickLoad()}>load</Button>
                 </Card.Body>

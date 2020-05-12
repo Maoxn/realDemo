@@ -70,16 +70,6 @@ class Fault2 extends Component {
     isLoading: true
   }
 
-  componentDidMount() {
-    fetch('https://jsonplaceholder.typicode.com/users')
-      .then(res => res.json())
-      .then(json => {
-        this.setState({
-          users: json,
-        })
-      });
-  }
-
   handleClickRand1 = () => {
     this.setState(
       {chartOptions: {series: [{
@@ -123,6 +113,14 @@ class Fault2 extends Component {
   handleClickLoad = () => {
     const array1 = [];
     const array2 = [];
+
+    fetch('https://jsonplaceholder.typicode.com/users')
+      .then(res => res.json())
+      .then(json => {
+        this.setState({
+          users: json,
+        })
+      });
 
     this.state.users.map(user => {
       array1.push(parseFloat(user.address.geo.lng))
@@ -170,8 +168,8 @@ class Fault2 extends Component {
                 <Card.Body>
                   <Button variant='secondary' onClick={() => this.handleClickRand1()}>rand1</Button>
                   <Button variant='secondary' onClick={() => this.handleClickRand2()}>rand2</Button>
-                  <Button variant='primary' onClick={() => this.handleClickDefault()}>default</Button>
-                  <Button variant='success' onClick={() => this.handleClickLoad()}>load</Button>
+                  <Button variant='success' onClick={() => this.handleClickDefault()}>default</Button>
+                  <Button variant='primary' onClick={() => this.handleClickLoad()}>load</Button>
                 </Card.Body>
               </Card>
             </Col>
@@ -203,8 +201,8 @@ class Fault2 extends Component {
                 <Card.Body>
                   <Button variant='secondary' onClick={() => this.handleClickRand1()}>rand1</Button>
                   <Button variant='secondary' onClick={() => this.handleClickRand2()}>rand2</Button>
-                  <Button variant='primary' onClick={() => this.handleClickDefault()}>default</Button>
-                  <Button variant='success' onClick={() => this.handleClickLoad()}>load</Button>
+                  <Button variant='success' onClick={() => this.handleClickDefault()}>default</Button>
+                  <Button variant='primary' onClick={() => this.handleClickLoad()}>load</Button>
                 </Card.Body>
               </Card>
             </Col>

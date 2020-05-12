@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/realDemo/static/css/main.8686e1f3.chunk.css",
+    "main.js": "/realDemo/static/js/main.9b392378.chunk.js",
+    "main.js.map": "/realDemo/static/js/main.9b392378.chunk.js.map",
+    "runtime-main.js": "/realDemo/static/js/runtime-main.25c93290.js",
+    "runtime-main.js.map": "/realDemo/static/js/runtime-main.25c93290.js.map",
+    "static/css/2.de424728.chunk.css": "/realDemo/static/css/2.de424728.chunk.css",
+    "static/js/2.e04140fa.chunk.js": "/realDemo/static/js/2.e04140fa.chunk.js",
+    "static/js/2.e04140fa.chunk.js.map": "/realDemo/static/js/2.e04140fa.chunk.js.map",
+    "index.html": "/realDemo/index.html",
+    "precache-manifest.ae6d7dc7890e2ccafc4d0e93eb9325db.js": "/realDemo/precache-manifest.ae6d7dc7890e2ccafc4d0e93eb9325db.js",
+    "service-worker.js": "/realDemo/service-worker.js",
+    "static/css/2.de424728.chunk.css.map": "/realDemo/static/css/2.de424728.chunk.css.map",
+    "static/css/main.8686e1f3.chunk.css.map": "/realDemo/static/css/main.8686e1f3.chunk.css.map",
+    "static/js/2.e04140fa.chunk.js.LICENSE.txt": "/realDemo/static/js/2.e04140fa.chunk.js.LICENSE.txt",
+    "static/media/logo.svg": "/realDemo/static/media/logo.5d5d9eef.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.25c93290.js",
+    "static/css/2.de424728.chunk.css",
+    "static/js/2.e04140fa.chunk.js",
+    "static/css/main.8686e1f3.chunk.css",
+    "static/js/main.9b392378.chunk.js"
+  ]
+}

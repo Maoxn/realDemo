@@ -1,19 +1,19 @@
-.App {
+.Fault {
   text-align: center;
 }
 
-.App-logo {
+.Fault-logo {
   height: 10vmin;
   pointer-events: none;
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .App-logo {
+  .Fault-logo {
     animation: App-logo-spin infinite 10s linear;
   }
 }
 
-.App-header {
+.Fault-header {
   background-color: #303030;
   min-height: 10vh;
   display: flex;
@@ -24,7 +24,7 @@
   color: white;
 }
 
-.App-link {
+.Fault-link {
   color: green;
 }
 

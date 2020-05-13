@@ -70,6 +70,16 @@ class Fault2 extends Component {
     isLoading: true
   }
 
+  async componentDidMount() {
+    await fetch('https://jsonplaceholder.typicode.com/users')
+      .then(res => res.json())
+      .then(json => {
+        this.setState({
+          users: json,
+        })
+      });
+  }
+
   handleClickRand1 = () => {
     this.setState(
       {chartOptions: {series: [{
@@ -113,14 +123,6 @@ class Fault2 extends Component {
   handleClickLoad = () => {
     const array1 = [];
     const array2 = [];
-
-    fetch('https://jsonplaceholder.typicode.com/users')
-      .then(res => res.json())
-      .then(json => {
-        this.setState({
-          users: json,
-        })
-      });
 
     this.state.users.map(user => {
       array1.push(parseFloat(user.address.geo.lng))

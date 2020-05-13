@@ -142,6 +142,28 @@ class Fault2 extends Component {
     )
   }
 
+  handleClickLoadp = () => {
+    const array1 = [];
+    const array2 = [];
+
+    this.state.users.map(user => {
+      array1.push(parseFloat(user.address.geo.lng))
+      array2.push(parseFloat(user.address.geo.lat))
+    })
+
+    this.setState(
+      {chartOptions: {series: [{
+        name: 'lat',
+        data: array1.slice(2, 6)
+      }, {
+        name: 'lng',
+        data: array2.slice(2, 6)
+      }]},
+      isLoading: false
+      }
+    )
+  }
+
   render() {
     var {users} = this.state;
     
@@ -172,6 +194,7 @@ class Fault2 extends Component {
                   <Button variant='warning' onClick={() => this.handleClickRand2()}>rand2</Button>
                   <Button variant='success' onClick={() => this.handleClickDefault()}>default</Button>
                   <Button variant='primary' onClick={() => this.handleClickLoad()}>load</Button>
+                  <Button variant='primary' onClick={() => this.handleClickLoadp()}>partLoad</Button>
                 </Card.Body>
               </Card>
             </Col>
@@ -207,6 +230,7 @@ class Fault2 extends Component {
                   <Button variant='warning' onClick={() => this.handleClickRand2()}>rand2</Button>
                   <Button variant='success' onClick={() => this.handleClickDefault()}>default</Button>
                   <Button variant='primary' onClick={() => this.handleClickLoad()}>load</Button>
+                  <Button variant='primary' onClick={() => this.handleClickLoadp()}>partLoad</Button>
                 </Card.Body>
               </Card>
             </Col>

@@ -53,7 +53,7 @@ class Fault2 extends Component {
           label: {
             connectorAllowed: false
           },
-          pointStart: 6
+          pointStart: 1
         }
       },
 
@@ -82,7 +82,26 @@ class Fault2 extends Component {
 
   handleClickRand1 = () => {
     this.setState(
-      {chartOptions: {series: [{
+      {chartOptions: {
+      yAxis: {
+        title: {
+          text: 'Valve status/%'
+        }
+      },
+
+      xAxis: {
+        title: {
+          text: 'Time stamp'
+        },
+        labels: {
+          format: '{value}:00'
+        },
+        accessibility: {
+          rangeDescription: 'Range: 6 to 22'
+        }
+      },
+
+      series: [{
         name: 'Scheduled valve status',
         data: [10, 3, 3, 3, 4, 5, 6, 5, 5, 3]
       }, {
@@ -95,7 +114,26 @@ class Fault2 extends Component {
 
   handleClickRand2 = () => {
     this.setState(
-      {chartOptions: {series: [{
+      {chartOptions: {
+      yAxis: {
+        title: {
+          text: 'Valve status/%'
+        }
+      },
+
+      xAxis: {
+        title: {
+          text: 'Time stamp'
+        },
+        labels: {
+          format: '{value}:00'
+        },
+        accessibility: {
+          rangeDescription: 'Range: 6 to 22'
+        }
+      },
+
+      series: [{
         name: 'Scheduled valve status',
         data: [2, 3, 3, 3, 4, 5, 6, 5, 5, 3]
       }, {
@@ -108,7 +146,26 @@ class Fault2 extends Component {
 
   handleClickDefault = () => {
     this.setState(
-      {chartOptions: {series: [{
+      {chartOptions: {
+      yAxis: {
+        title: {
+          text: 'Valve status/%'
+        }
+      },
+
+      xAxis: {
+        title: {
+          text: 'Time stamp'
+        },
+        labels: {
+          format: '{value}:00'
+        },
+        accessibility: {
+          rangeDescription: 'Range: 6 to 22'
+        }
+      },
+
+      series: [{
         name: 'Scheduled valve status',
         data: [2, 3, 3, 3, 4, 5, 6, 5, 5, 3]
       }, {
@@ -125,12 +182,31 @@ class Fault2 extends Component {
     const array2 = [];
 
     this.state.users.map(user => {
-      array1.push(parseFloat(user.address.geo.lng))
-      array2.push(parseFloat(user.address.geo.lat))
+      array1.push(parseFloat(user.address.geo.lat))
+      array2.push(parseFloat(user.address.geo.lng))
     })
 
     this.setState(
-      {chartOptions: {series: [{
+      {chartOptions: {
+      xAxis: {
+        title: {
+          text: 'User ID'
+        },
+        labels: {
+          format: 'id:{value}'
+        },
+        accessibility: {
+          rangeDescription: 'Range: 1 to 10'
+        }
+      },
+
+      yAxis: {
+        title: {
+          text: 'Value'
+        }
+      },
+
+      series: [{
         name: 'lat',
         data: array1
       }, {
@@ -147,17 +223,36 @@ class Fault2 extends Component {
     const array2 = [];
 
     this.state.users.map(user => {
-      array1.push(parseFloat(user.address.geo.lng))
-      array2.push(parseFloat(user.address.geo.lat))
+      array1.push(parseFloat(user.address.geo.lat))
+      array2.push(parseFloat(user.address.geo.lng))
     })
 
     this.setState(
-      {chartOptions: {series: [{
+      {chartOptions: {
+      xAxis: {
+        title: {
+          text: 'User ID'
+        },
+        labels: {
+          format: 'id:{value}'
+        },
+        accessibility: {
+          rangeDescription: 'Range: 2 to 5'
+        }
+      },
+
+      yAxis: {
+        title: {
+          text: 'Value'
+        }
+      },
+
+      series: [{
         name: 'lat',
-        data: array1.slice(2, 6)
+        data: array1.slice(0, 6)
       }, {
         name: 'lng',
-        data: array2.slice(2, 6)
+        data: array2.slice(0, 6)
       }]},
       isLoading: false
       }

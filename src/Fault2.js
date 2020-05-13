@@ -131,10 +131,10 @@ class Fault2 extends Component {
 
     this.setState(
       {chartOptions: {series: [{
-        name: 'Scheduled valve status',
+        name: 'lat',
         data: array1
       }, {
-        name: 'Actual status',
+        name: 'lng',
         data: array2
       }]},
       isLoading: false
@@ -162,7 +162,7 @@ class Fault2 extends Component {
                     <ul>
                       {users.map(user => (
                         <li key={user.id}>
-                          Name: {user.name}
+                          Name: {user.name} | lat: {user.address.geo.lat} | lng: {user.address.geo.lng}
                        </li>
                       ))}
                     </ul>
@@ -178,7 +178,9 @@ class Fault2 extends Component {
           </Row>
           <Row>
             <Col>
-              <Link to='/'>Home</Link>
+              <Link to='/'>
+                <Button variant='secondary'>Home</Button>
+              </Link>
             </Col>
           </Row>
         </Container>
@@ -211,7 +213,9 @@ class Fault2 extends Component {
           </Row>
           <Row>
             <Col>
-              <Link to='/'>Home</Link>
+              <Link to='/'>
+                <Button variant='secondary'>Home</Button>
+              </Link>
             </Col>
           </Row>
         </Container>

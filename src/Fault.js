@@ -97,15 +97,17 @@ class Fault extends Component {
                   Highlighting
                 </Card.Header>
                 <Card.Body>
-                  <Button variant='secondary'>Line 1</Button>
-                  <Button variant='secondary'>Line 2</Button>
+                  <Button variant='warning'>Line 1</Button>
+                  <Button variant='warning'>Line 2</Button>
                 </Card.Body>
               </Card>
             </Col>
           </Row>
           <Row>
             <Col>
-              <Link to='/'>Home</Link>
+              <Link to='/'>
+                <Button variant='secondary'>Home</Button>
+              </Link>
             </Col>
           </Row>
         </Container>

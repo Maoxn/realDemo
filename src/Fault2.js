@@ -71,7 +71,8 @@ class Fault2 extends Component {
   }
 
   async componentDidMount() {
-    await fetch('https://jsonplaceholder.typicode.com/users')
+    const url = 'https://capstone4.blob.core.windows.net/capstone-2020-05-19-container-5/small_radio.json'
+    await fetch(url, { method:'GET', mode:'cors' })
       .then(res => res.json())
       .then(json => {
         this.setState({
@@ -182,8 +183,8 @@ class Fault2 extends Component {
     const array2 = [];
 
     this.state.users.map(user => {
-      array1.push(parseFloat(user.address.geo.lat))
-      array2.push(parseFloat(user.address.geo.lng))
+      array1.push(parseFloat(user.userId))
+      array2.push(parseFloat(user.sessionId))
     })
 
     this.setState(
@@ -223,8 +224,8 @@ class Fault2 extends Component {
     const array2 = [];
 
     this.state.users.map(user => {
-      array1.push(parseFloat(user.address.geo.lat))
-      array2.push(parseFloat(user.address.geo.lng))
+      array1.push(parseFloat(user.userId))
+      array2.push(parseFloat(user.sessionId))
     })
 
     this.setState(
@@ -279,7 +280,7 @@ class Fault2 extends Component {
                     <ul>
                       {users.map(user => (
                         <li key={user.id}>
-                          Name: {user.name} | lat: {user.address.geo.lat} | lng: {user.address.geo.lng}
+                          userID: {user.userId} | sessionID: {user.sessionId}
                        </li>
                       ))}
                     </ul>

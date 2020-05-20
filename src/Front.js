@@ -137,7 +137,7 @@ class Page extends Component {
                     placement="left"
                     overlay=
                       <Popover id="popover-test" style={{width:"100rem"}}>
-                        <Popover.Title as="h3">Detailed version</Popover.Title>
+                        <Popover.Title as="h3">Really detailed version!</Popover.Title>
                         <Popover.Content>
                           <Image
                             src="https://os.alipayobjects.com/rmsportal/VVPAIRTNYwbbZut.jpg"

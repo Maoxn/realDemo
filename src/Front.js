@@ -181,6 +181,7 @@ class Page extends Component {
                     <Dropdown.Item href="#/action-3">Optimization 6</Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>
+                <Link to="/read"><Button variant="secondary">testReading</Button></Link>
               </Jumbotron>
             </Col>
           </Row>

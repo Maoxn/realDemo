@@ -14,6 +14,7 @@ import {
 import Front from './Front'
 import Fault from './Fault'
 import Fault2 from './Fault2'
+import testReading from './testReading'
 
 class App extends Component {
   render() {
@@ -23,6 +24,7 @@ class App extends Component {
           <Route exact path="/" component={Front} />
           <Route exact path="/fault" component={Fault} />
           <Route exact path="/fault2" component={Fault2} />
+          <Route exact path="/read" component={testReading} />
           <Route exact path="/404" component={NotFound} />
           <Redirect to="/404" />
         </Switch>

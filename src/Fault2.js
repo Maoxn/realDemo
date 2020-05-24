@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './Fault.css';
 
 import {
@@ -70,9 +69,9 @@ class Fault2 extends Component {
     isLoading: true
   }
 
-  async componentDidMount() {
-    const url = 'https://capstone4.blob.core.windows.net/capstone-2020-05-19-container-5/small_radio.json'
-    await fetch(url, { method:'GET', mode:'cors' })
+  async dataLoader() {
+    const url = 'https://capstone4.blob.core.windows.net/capstone-2020-05-19-container-5/a_b.json'
+    await fetch(url)
       .then(res => res.json())
       .then(json => {
         this.setState({
@@ -179,13 +178,20 @@ class Fault2 extends Component {
   }
 
   handleClickLoad = () => {
+    this.dataLoader();
+
     const array1 = [];
     const array2 = [];
 
-    this.state.users.map(user => {
-      array1.push(parseFloat(user.userId))
-      array2.push(parseFloat(user.sessionId))
-    })
+    //this.state.users.map(user => {
+      //array1.push(parseFloat(user.address.geo.lat))
+      //array2.push(parseFloat(user.address.geo.lng))
+    //})
+    let length = this.state.users.length;
+    for (let i = 2; i < length-1; i++) { 
+      array1.push(parseFloat(this.state.users[i].address.geo.lat))
+      array2.push(parseFloat(this.state.users[i].address.geo.lng))
+    }
 
     this.setState(
       {chartOptions: {
@@ -197,7 +203,7 @@ class Fault2 extends Component {
           format: 'id:{value}'
         },
         accessibility: {
-          rangeDescription: 'Range: 1 to 10'
+          rangeDescription: 'Range: 1 to 25'
         }
       },
 
@@ -220,12 +226,14 @@ class Fault2 extends Component {
   }
 
   handleClickLoadp = () => {
+    this.dataLoader();
+
     const array1 = [];
     const array2 = [];
 
     this.state.users.map(user => {
-      array1.push(parseFloat(user.userId))
-      array2.push(parseFloat(user.sessionId))
+      array1.push(parseFloat(user.address.geo.lat))
+      array2.push(parseFloat(user.address.geo.lng))
     })
 
     this.setState(
@@ -278,9 +286,9 @@ class Fault2 extends Component {
                 </Card.Header>
                 <Card.Text>
                     <ul>
-                      {users.map(user => (
-                        <li key={user.id}>
-                          userID: {user.userId} | sessionID: {user.sessionId}
+                      {users.map((user, index) => (
+                        <li key={index}>
+                          lat: {user.address.geo.lat} | lng: {user.address.geo.lng}
                        </li>
                       ))}
                     </ul>

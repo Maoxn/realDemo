@@ -70,7 +70,7 @@ class Fault2 extends Component {
   }
 
   async dataLoader() {
-    const url = 'https://capstone4.blob.core.windows.net/capstone-2020-05-19-container-5/a_b.json'
+    const url = 'https://capstone4.blob.core.windows.net/capstone-2020-05-19-container-5/a_c.json'
     await fetch(url)
       .then(res => res.json())
       .then(json => {

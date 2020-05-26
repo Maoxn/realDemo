@@ -6,6 +6,8 @@ import * as serviceWorker from './serviceWorker';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+//realDemo
+//console.log(process.env.PUBLIC_URL)
 ReactDOM.render(
   <React.StrictMode>
     <App />

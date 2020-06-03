@@ -47,20 +47,13 @@ class Fault2 extends Component {
         }
       },
 
-      plotOptions: {
-        series: {
-          label: {
-            connectorAllowed: false
-          },
-          pointStart: 1
-        }
-      },
-
       series: [{
         name: 'Scheduled valve status',
+        pointStart: 10,
         data: [2, 3, 3, 3, 4, 5, 6, 5, 5, 3]
       }, {
         name: 'Actual status',
+        pointStart: 15,
         data: [3, 3, 4, 5, 7, 8, 10, 12, 7, 5]
       }]
     },
@@ -70,7 +63,7 @@ class Fault2 extends Component {
   }
 
   async dataLoader() {
-    const url = 'https://capstone4.blob.core.windows.net/capstone-2020-05-19-container-5/a_b.json'
+    const url = 'https://capstone4.blob.core.windows.net/capstone-2020-05-19-container-5/a_e.json'
     await fetch(url)
       .then(res => res.json())
       .then(json => {
@@ -80,39 +73,48 @@ class Fault2 extends Component {
       });
   }
 
-  handleClickRand1 = () => {
-    this.setState(
-      {chartOptions: {
-      yAxis: {
-        title: {
-          text: 'Valve status/%'
-        }
-      },
+  handleClickRange = () => {
+    const newArray1 = [2, 3, 3, 3, 4, 5, 6, 5, 5, 3];
+    const newArray2 = [3, 3, 4, 5, 7, 8, 10, 12, 7, 5];
 
-      xAxis: {
-        title: {
-          text: 'Time stamp'
-        },
-        labels: {
-          format: '{value}:00'
-        },
-        accessibility: {
-          rangeDescription: 'Range: 6 to 22'
-        }
-      },
+    //const newChartOptions = this.state.chartOptions;
+    //newChartOptions.series[0].update({
+      //pointStart: 15
+    //})
 
-      series: [{
-        name: 'Scheduled valve status',
-        data: [10, 3, 3, 3, 4, 5, 6, 5, 5, 3]
-      }, {
-        name: 'Actual status',
-        data: [3, 3, 4, 5, 7, 8, 10, 12, 7, 5]
+    this.setState({
+      chartOptions: {
+        yAxis: {
+          title: {
+            text: 'Valve status/%'
+          }
+        },
+  
+        xAxis: {
+          title: {
+            text: 'Time stamp'
+          },
+          labels: {
+            format: '{value}:00'
+          },
+          accessibility: {
+            rangeDescription: 'Range: 6 to 22'
+          }
+        },
+  
+        series: [{
+          name: 'Scheduled valve status',
+          pointStart: 15,
+          data: newArray1
+        }, {
+          name: 'Actual status',
+          pointStart: 15,
+          data: newArray2
       }]}
-      }
-    )
+    })
   }
 
-  handleClickRand2 = () => {
+  handleClickBand = () => {
     this.setState(
       {chartOptions: {
       yAxis: {
@@ -130,7 +132,12 @@ class Fault2 extends Component {
         },
         accessibility: {
           rangeDescription: 'Range: 6 to 22'
-        }
+        },
+        plotBands: [{
+          from: 18,
+          to: 20,
+          color: 'rgba(168, 170, 213, .2)'
+        }]
       },
 
       series: [{
@@ -138,7 +145,7 @@ class Fault2 extends Component {
         data: [2, 3, 3, 3, 4, 5, 6, 5, 5, 3]
       }, {
         name: 'Actual status',
-        data: [12, 7, 4, 5, 7, 8, 10, 12, 7, 5]
+        data: [3, 3, 4, 5, 7, 8, 10, 12, 7, 5]
       }]}
       }
     )
@@ -162,14 +169,17 @@ class Fault2 extends Component {
         },
         accessibility: {
           rangeDescription: 'Range: 6 to 22'
-        }
+        },
+        plotBands: null
       },
 
       series: [{
         name: 'Scheduled valve status',
+        pointStart: 10,
         data: [2, 3, 3, 3, 4, 5, 6, 5, 5, 3]
       }, {
         name: 'Actual status',
+        pointStart: 15,
         data: [3, 3, 4, 5, 7, 8, 10, 12, 7, 5]
       }]},
       isLoading: true
@@ -183,15 +193,15 @@ class Fault2 extends Component {
     const array1 = [];
     const array2 = [];
 
-    //this.state.users.map(user => {
-      //array1.push(parseFloat(user.address.geo.lat))
-      //array2.push(parseFloat(user.address.geo.lng))
-    //})
-    let length = this.state.users.length;
-    for (let i = 2; i < length-1; i++) { 
-      array1.push(parseFloat(this.state.users[i].address.geo.lat))
-      array2.push(parseFloat(this.state.users[i].address.geo.lng))
-    }
+    this.state.users.map(user => {
+      array1.push(parseFloat(user.address.geo.lat))
+      array2.push(parseFloat(user.address.geo.lng))
+    })
+    //let length = this.state.users.length;
+    //for (let i = 2; i < length-1; i++) { 
+      //array1.push(parseFloat(this.state.users[i].address.geo.lat))
+      //array2.push(parseFloat(this.state.users[i].address.geo.lng))
+    //}
 
     this.setState(
       {chartOptions: {
@@ -215,9 +225,11 @@ class Fault2 extends Component {
 
       series: [{
         name: 'lat',
+        pointStart: 1,
         data: array1
       }, {
         name: 'lng',
+        pointStart: 1,
         data: array2
       }]},
       isLoading: false
@@ -258,10 +270,12 @@ class Fault2 extends Component {
 
       series: [{
         name: 'lat',
-        data: array1.slice(0, 6)
+        pointStart: 3,
+        data: array1.slice(2, 7)
       }, {
         name: 'lng',
-        data: array2.slice(0, 6)
+        pointStart: 3,
+        data: array2.slice(2, 7)
       }]},
       isLoading: false
       }
@@ -294,8 +308,8 @@ class Fault2 extends Component {
                     </ul>
                 </Card.Text>
                 <Card.Body>
-                  <Button variant='warning' onClick={() => this.handleClickRand1()}>rand1</Button>
-                  <Button variant='warning' onClick={() => this.handleClickRand2()}>rand2</Button>
+                  <Button variant='warning' onClick={() => this.handleClickRange()}>range</Button>
+                  <Button variant='warning' onClick={() => this.handleClickBand()}>band</Button>
                   <Button variant='success' onClick={() => this.handleClickDefault()}>default</Button>
                   <Button variant='primary' onClick={() => this.handleClickLoad()}>load</Button>
                   <Button variant='primary' onClick={() => this.handleClickLoadp()}>partLoad</Button>
@@ -330,8 +344,8 @@ class Fault2 extends Component {
                     Press load button to see something here
                 </Card.Text>
                 <Card.Body>
-                  <Button variant='warning' onClick={() => this.handleClickRand1()}>rand1</Button>
-                  <Button variant='warning' onClick={() => this.handleClickRand2()}>rand2</Button>
+                  <Button variant='warning' onClick={() => this.handleClickRange()}>range</Button>
+                  <Button variant='warning' onClick={() => this.handleClickBand()}>band</Button>
                   <Button variant='success' onClick={() => this.handleClickDefault()}>default</Button>
                   <Button variant='primary' onClick={() => this.handleClickLoad()}>load</Button>
                   <Button variant='primary' onClick={() => this.handleClickLoadp()}>partLoad</Button>

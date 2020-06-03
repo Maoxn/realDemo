@@ -151,7 +151,7 @@ class Page extends Component {
                   </OverlayTrigger>
                 </Card.Body>
               </Card>
-              <Jumbotron fluid style={{ height: "9.5rem"}}>
+              <Jumbotron fluid >
                 <Dropdown>
                   <Dropdown.Toggle variant="danger" id="dropdown-basic">
                     Faults

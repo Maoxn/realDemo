@@ -1,0 +1,12 @@
+
+List all blobs in specific folder 
+https://capstone4.z22.web.core.windows.net/capstone-2020-05-19-container-5/?prefix=<foldername>/
+
+
+List all the blob including folder and blob
+https://capstone4.z22.web.core.windows.net/capstone-2020-05-19-container-5/
+
+read and fetch specific blob
+
+https://tigniscdn.azureedge.net/capstone-2020-05-19-container-5/<json name>
+

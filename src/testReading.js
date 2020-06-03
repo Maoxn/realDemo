@@ -26,17 +26,31 @@ accessibility(Highcharts)
 const account = 'capstone4'
 const container = 'capstone-2020-05-19-container-5'
 //const container = '$web'
-const containerlink = `https://${account}.blob.core.windows.net/${container}/`
+const containerlink_json = `https://tigniscdn.azureedge.net/${container}/`
+const containerlink_folder= `https://capstone4.z22.web.core.windows.net/${container}/`
 
+
+// List all blobs in specific folder 
+// https://capstone4.z22.web.core.windows.net/capstone-2020-05-19-container-5/?prefix=<foldername>/
+
+
+// List all the blob including folder and blob
+// https://capstone4.z22.web.core.windows.net/capstone-2020-05-19-container-5/
+
+// read and fetch specific blob
+
+// https://tigniscdn.azureedge.net/capstone-2020-05-19-container-5/<json name>
 
 
 
 class testReading extends Component {
   state = {
     data: [],
-    isLoading: true
+    isLoading: true,
+    prefix:""
+  
   }
-  listBlobs(state, instance) {
+  listBlobs() {
     // this lists Blobs in pages defined in state.pageSize
     this.setState({ isLoading: true });
 
@@ -44,12 +58,15 @@ class testReading extends Component {
     // and does not require authorization
     const anonymousCredential = new AnonymousCredential();
     const pipeline = StorageURL.newPipeline(anonymousCredential);
-
-    const serviceURL = new ServiceURL(
-        `https://${account}.blob.core.windows.net`,
-        pipeline
+    let serviceURL; 
+   
+    serviceURL = new ServiceURL(
+      `https://${account}.blob.core.windows.net`+this.state.prefix,
+      pipeline
     );
-
+    
+      
+    
     // If you are using a SAS token, simply append to ContainerURL here. 
     // We will use anonymous access hence no SAS token
     const containerName = container //+ `?st=2018-11-06T06%3A15%3A24Z&se=2019-11-07T06%3A15%3A00Z&sp=rl&sv=2018-03-28&sr=c&sig=4vCT7aInDWRiypkuYlezN8dos0K2h2DvQ0pnNkMJSFs%3D`;
@@ -86,26 +103,31 @@ class testReading extends Component {
   //     });
   // }
 
-//   renderLink(blobName) {
-//     console.log(blobName)
-//     var link;
-//     if(blobName === "../")
-//     {
-//         link = "/"
-//     }
-//     else if(blobName.slice(-1) === "/")
-//     {
-//         link = "?prefix=" + blobName
-//     } else {
-//         link = containerlink + blobName
-//     }
-//     return (
-//         //blob name 
-//         <a href={link}>
-//             {blobName}
-//         </a>
-//     );
-// }
+  renderLink(blobName) {
+    console.log(blobName)
+    var link;
+    if(blobName === "../")
+    {
+        link = "/"
+    }
+    else if(blobName.slice(-1) === "/")
+    {
+      this.setState({
+        prefix:blobName
+
+      })
+  
+        
+    } else {
+        link = containerlink_json + blobName
+    }
+    return (
+        //blob name 
+        <a href={link}>
+            {blobName}
+        </a>
+    );
+}
 
   handleClickDefault = () => {
     this.setState({
@@ -114,6 +136,7 @@ class testReading extends Component {
   }
 
   handleClickLoad = () => {
+  
     this.listBlobs();
 
   }
@@ -133,7 +156,7 @@ class testReading extends Component {
                 <ul>
                     {data.map((user, index) => (
                         <li key={index}>
-                          Fault: {user.name}
+                          Fault: {this.renderLink(user.name)}
                        </li>
                     ))}
                 </ul>

@@ -70,7 +70,7 @@ class Fault2 extends Component {
   }
 
   async dataLoader() {
-    const url = 'https://capstone4.blob.core.windows.net/capstone-2020-05-19-container-5/a_c.json'
+    const url = 'https://tigniscdn.azureedge.net/capstone-2020-05-19-container-5/a_e.json'
     await fetch(url)
       .then(res => res.json())
       .then(json => {
@@ -183,15 +183,15 @@ class Fault2 extends Component {
     const array1 = [];
     const array2 = [];
 
-    //this.state.users.map(user => {
-      //array1.push(parseFloat(user.address.geo.lat))
-      //array2.push(parseFloat(user.address.geo.lng))
-    //})
-    let length = this.state.users.length;
-    for (let i = 2; i < length-1; i++) { 
-      array1.push(parseFloat(this.state.users[i].address.geo.lat))
-      array2.push(parseFloat(this.state.users[i].address.geo.lng))
-    }
+    this.state.users.map(user => {
+      array1.push(parseFloat(user.address.geo.lat))
+      array2.push(parseFloat(user.address.geo.lng))
+    })
+    // let length = this.state.users.length;
+    // for (let i = 2; i < length-1; i++) { 
+    //   array1.push(parseFloat(this.state.users[i].address.geo.lat))
+    //   array2.push(parseFloat(this.state.users[i].address.geo.lng))
+    // }
 
     this.setState(
       {chartOptions: {

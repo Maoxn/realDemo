@@ -19,7 +19,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "start-api":"cd api && flask run --no-debugger",
+    "start-api":"cd api&&source venv/bin/flask run --no-debugger",
+    "test-api":"cd api&& flask test",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
@@ -42,6 +43,7 @@
     ]
   },
   "proxy":"http://localhost:5000",
+
   "devDependencies": {
     "gh-pages": "^2.2.0"
   }

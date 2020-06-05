@@ -182,6 +182,7 @@ class Page extends Component {
                   </Dropdown.Menu>
                 </Dropdown>
                 <Link to="/read"><Button variant="secondary">testReading</Button></Link>
+                <Link to="/backend"><Button variant="secondary">testBackend</Button></Link>
               </Jumbotron>
             </Col>
           </Row>

@@ -47,40 +47,49 @@ class testReading extends Component {
   state = {
     data: [],
     isLoading: true,
-    prefix:""
+    prefix:"",
+    isRoot:true
+    
   
   }
   listBlobs() {
     // this lists Blobs in pages defined in state.pageSize
     this.setState({ isLoading: true });
 
-<<<<<<< HEAD
-  listBlobs = () => {
-    // this lists Blobs in pages defined in state.pageSize
-    this.setState({
-      isLoading: true
-    });
-
-=======
->>>>>>> a2f45531ba1ef74175170e986905d2a9e8c704c2
     // Use AnonymousCredential since $web container is made a 'public container' 
     // and does not require authorization
-    const anonymousCredential = new AnonymousCredential();
-    const pipeline = StorageURL.newPipeline(anonymousCredential);
+    let anonymousCredential = new AnonymousCredential();
+    let pipeline = StorageURL.newPipeline(anonymousCredential);
     let serviceURL; 
-   
-    serviceURL = new ServiceURL(
-      `https://${account}.blob.core.windows.net`+this.state.prefix,
-      pipeline
-    );
-    
-      
+    // console.log(this.state.prefix)
+    if(this.state.isRoot===true){
+      serviceURL = new ServiceURL(
+       //`https://${account}.blob.core.windows.net/`,
+       //`https://capstone4.z22.web.core.windows.net/`,
+       'https://tigniscdn.azureedge.net/',
+        pipeline
+      );
+
+    }else{
+      console.log(this.state.prefix.link)
+
+      serviceURL = new ServiceURL(
+        `https://tigniscdn.azureedge.net/`,
+        pipeline
+      )
+
+    }
+  
     
     // If you are using a SAS token, simply append to ContainerURL here. 
     // We will use anonymous access hence no SAS token
-    const containerName = container //+ `?st=2018-11-06T06%3A15%3A24Z&se=2019-11-07T06%3A15%3A00Z&sp=rl&sv=2018-03-28&sr=c&sig=4vCT7aInDWRiypkuYlezN8dos0K2h2DvQ0pnNkMJSFs%3D`;
-    const containerURL = ContainerURL.fromServiceURL(serviceURL, containerName);
+    let containerName = container //+ `?st=2018-11-06T06%3A15%3A24Z&se=2019-11-07T06%3A15%3A00Z&sp=rl&sv=2018-03-28&sr=c&sig=4vCT7aInDWRiypkuYlezN8dos0K2h2DvQ0pnNkMJSFs%3D`;
+    let containerURL = ContainerURL.fromServiceURL(serviceURL, containerName);
+    containerURL.url+='?delimiter=%2F&restype=container&comp=list&_=1591221986107&prefix=dataset/'
     console.log(containerURL)
+  
+    
+    
     
     // // Fetch the prefix in the query params to browse into folders
     // const urlParams = new URLSearchParams(window.location.search);
@@ -90,10 +99,7 @@ class testReading extends Component {
         Aborter.none,
         "/",
     ).then(res => {
-<<<<<<< HEAD
-=======
           
->>>>>>> a2f45531ba1ef74175170e986905d2a9e8c704c2
         // Combine the found virtual directories and files
         Array.prototype.push.apply(res.segment.blobItems, res.segment.blobPrefixes)
         // Store the state
@@ -101,13 +107,8 @@ class testReading extends Component {
             data: res.segment.blobItems,
             isLoading: false
         });
-<<<<<<< HEAD
-    });
-  }
-=======
 });
 }
->>>>>>> a2f45531ba1ef74175170e986905d2a9e8c704c2
 
   // async dataLoader() {
   //   const url = 'https://capstone4.blob.core.windows.net/capstone-2020-05-19-container-5/a_b.json'
@@ -120,7 +121,6 @@ class testReading extends Component {
   //     });
   // }
 
-<<<<<<< HEAD
   renderLink(pathName) {
     // console.log(blobName)
     var link = "";
@@ -134,6 +134,7 @@ class testReading extends Component {
         )
     } else if (pathName.slice(-1)=="/") {
       link = pathName
+     
 
       return(
         <a onClick={() => this.getInFolder({link})}>{pathName}</a>
@@ -150,37 +151,11 @@ class testReading extends Component {
 
   getInFolder(folderName) {
     this.setState({
-        prefix: folderName
+        prefix: folderName,
+        isRoot:false
     })
     this.listBlobs()
   }
-=======
-  renderLink(blobName) {
-    console.log(blobName)
-    var link;
-    if(blobName === "../")
-    {
-        link = "/"
-    }
-    else if(blobName.slice(-1) === "/")
-    {
-      this.setState({
-        prefix:blobName
-
-      })
-  
-        
-    } else {
-        link = containerlink_json + blobName
-    }
-    return (
-        //blob name 
-        <a href={link}>
-            {blobName}
-        </a>
-    );
-}
->>>>>>> a2f45531ba1ef74175170e986905d2a9e8c704c2
 
   handleClickDefault = () => {
     this.setState({
@@ -189,13 +164,9 @@ class testReading extends Component {
   }
 
   handleClickLoad = () => {
-<<<<<<< HEAD
-    this.listBlobs();
-=======
   
     this.listBlobs();
 
->>>>>>> a2f45531ba1ef74175170e986905d2a9e8c704c2
   }
  
 

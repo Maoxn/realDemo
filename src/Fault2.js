@@ -63,11 +63,7 @@ class Fault2 extends Component {
   }
 
   async dataLoader() {
-<<<<<<< HEAD
     const url = 'https://capstone4.blob.core.windows.net/capstone-2020-05-19-container-5/a_e.json'
-=======
-    const url = 'https://tigniscdn.azureedge.net/capstone-2020-05-19-container-5/a_e.json'
->>>>>>> a2f45531ba1ef74175170e986905d2a9e8c704c2
     await fetch(url)
       .then(res => res.json())
       .then(json => {
@@ -201,19 +197,11 @@ class Fault2 extends Component {
       array1.push(parseFloat(user.address.geo.lat))
       array2.push(parseFloat(user.address.geo.lng))
     })
-<<<<<<< HEAD
     //let length = this.state.users.length;
     //for (let i = 2; i < length-1; i++) { 
       //array1.push(parseFloat(this.state.users[i].address.geo.lat))
       //array2.push(parseFloat(this.state.users[i].address.geo.lng))
     //}
-=======
-    // let length = this.state.users.length;
-    // for (let i = 2; i < length-1; i++) { 
-    //   array1.push(parseFloat(this.state.users[i].address.geo.lat))
-    //   array2.push(parseFloat(this.state.users[i].address.geo.lng))
-    // }
->>>>>>> a2f45531ba1ef74175170e986905d2a9e8c704c2
 
     this.setState(
       {chartOptions: {

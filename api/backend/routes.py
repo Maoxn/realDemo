@@ -41,30 +41,16 @@ for blob in blob_list[:1]:
 
 #print(object_list[0][0])
 loaded_json = json.loads(objectList[0])
-#print(loaded_json[0])
+print(loaded_json[0])
 
 
-# @app.route("/datset")
-# def dataset():
-#     return posts
-
-
-
-#@app.route("/instructions")
-#def Instructions():
-    
-#    instructions = Instructions(username=form.username.data, email=form.email.data, password=hashed_password)
-#    db.session.add(user)
-#    db.session.commit()
-#    return posts
-#print(len(objectList[0]))
-
+db.drop_all()
 db.create_all()
 #db.drop_all()
 for index,instructions in enumerate(loaded_json,1):
 
 
-    Instructions_index="instructions"+str(index)
+    #Instructions_index="instructions"+str(index)
    # print(Instructions_index)
 
     Iname = Instructions(fault_type=instructions['ID'])
@@ -90,7 +76,42 @@ for index,instructions in enumerate(loaded_json,1):
     graph_1=GraphInfo(Time=epochtime,TimeRange=instructions['GraphInfo']['TimeRange'],
     sensors=selected_sensors,fault_id=fault.id)
     db.session.add(graph_1)
-    db.session.commit() 
-a=Instructions.query.first()
-fault=Instructions.query.get(a.id)
+    db.session.commit()
+
+
+instruction=Instructions.query.first()
+instruction_all=Instructions.query.first()
+print(instruction_all)
+fault=Instructions.query.get(instruction.id)
 print(fault.graphinfo)
+
+#for info in fault.graphinfo:
+#    print("id :{}\nTime: {}\nTimeRange :{}\nsensors: {}".format(info.id,info.Time,info.TimeRange,info.sensors))
+
+
+
+
+@app.route('/instructions/<id>')
+def detailgraph(id):
+  
+     info=GraphInfo.query.get(id)
+     graphinfo={
+        "id":info.id,
+        "Time":info.Time,
+        "TimeRange":info.TimeRange,
+        "sensors":info.sensors
+     }
+     return json.dumps(graphinfo) 
+        
+
+@app.route('/instructions')
+def instructions():
+     name_list=[]
+     instruction=Instructions.query.first()
+    
+     for instruction in Instructions.query.all():
+             
+         name_list.append({instruction.fault_type:instruction.id})
+     name_list=json.dumps(name_list)   
+
+     return name_list

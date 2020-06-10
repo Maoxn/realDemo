@@ -85,7 +85,7 @@ class testReading extends Component {
     // We will use anonymous access hence no SAS token
     let containerName = container //+ `?st=2018-11-06T06%3A15%3A24Z&se=2019-11-07T06%3A15%3A00Z&sp=rl&sv=2018-03-28&sr=c&sig=4vCT7aInDWRiypkuYlezN8dos0K2h2DvQ0pnNkMJSFs%3D`;
     let containerURL = ContainerURL.fromServiceURL(serviceURL, containerName);
-    containerURL.url+='?delimiter=%2F&restype=container&comp=list&_=1591221986107&prefix=dataset/'
+    //containerURL.url+='?delimiter=%2F&restype=container&comp=list&_=1591221986107&prefix=dataset/'
     console.log(containerURL)
   
     

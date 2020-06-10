@@ -34,9 +34,10 @@ function Testbackend() {
 
 
     useEffect(() => {
-        fetch('/time').then(res => res.json()).then(data => {
-          setCurrentTime(data.time);
-        });
+        fetch('/instructions/id').then(res => res.json()).then(data => {
+          //console.log(data)
+          //setCurrentTime(data[0]);
+       });
       }, []);
 
 
@@ -44,15 +45,12 @@ function Testbackend() {
 
 
 const loadBackend=()=> {
-    fetch('/time').then(res => res.json()).then(data => {
-        setCurrentTime(data.time);
+    fetch('/instructions').then(res => res.json()).then(data => {
+        for (var key in data[0])
+          console.log(key);
+          setCurrentTime(key);
       });
     setLoading(false);
-    
-    // fetch('/time').then(res => res.json()).then(data => {
-    //     setCurrentTime(data.time);
-    //   });
-      console.log({currentTime})
     
   }
 
@@ -76,7 +74,7 @@ const handleClickDefault = () => {
             <Card.Text>
                 <ul>
                     <li >
-                        time {currentTime}
+                        Fault:{currentTime}
                     </li>
                 </ul>
             </Card.Text>

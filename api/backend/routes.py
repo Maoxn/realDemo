@@ -30,57 +30,55 @@ for blob in blob_list_result_iterator:
 blob_iterator: ItemPaged[BlobProperties] = containerClient_fault .list_blobs()
 blob_list = sorted(list(blob_iterator), key=lambda blob: blob.last_modified)  # sort by the second column
 
-#big_frame=pd.DataFrame(data=d)
-#print(len(blob_list))
-for blob in blob_list[:1]:
+#reading the first blob only
+for blob in blob_list[1:2]:
   
   stream: StorageStreamDownloader = containerClient_fault .download_blob(blob.name)
   b2 = stream.readall()
   decoded = b2.decode("utf-8")   # converts from bytes type to string
   objectList.append(decoded)
 
-#print(object_list[0][0])
-loaded_json = json.loads(objectList[0])
-print(loaded_json[0])
 
 
 db.drop_all()
 db.create_all()
-#db.drop_all()
-for index,instructions in enumerate(loaded_json,1):
+
+for instructions in objectList:
+    
+    loaded_json = json.loads(instructions)
+    #print(loaded_json)
+    
+    for item in loaded_json:
 
 
-    #Instructions_index="instructions"+str(index)
-   # print(Instructions_index)
-
-    Iname = Instructions(fault_type=instructions['ID'])
-    db.session.add(Iname)
-    db.session.commit()
+        Iname = Instructions(fault_type=item['ID'])
+        db.session.add(Iname)
+        db.session.commit()
 
 
-    tranfer_epochtime=datetime.strptime(instructions['GraphInfo']['Time'], "%Y-%m-%d %H:%M:%S")
-    epochtime=time.mktime(tranfer_epochtime.timetuple())
-    sensor=instructions['GraphInfo']['Datatype']
-    selected_sensors= ""
+        tranfer_epochtime=datetime.strptime(item['GraphInfo']['Time'], "%Y-%m-%d %H:%M:%S")
+        epochtime=time.mktime(tranfer_epochtime.timetuple())
+        sensor=item['GraphInfo']['Datatype']
+        selected_sensors= ""
 
-    for key in sensor:
-        if sensor[key]==1:
-            selected_sensors+=key
-            selected_sensors+=" "
+        for key in sensor:
+            if sensor[key]==1:
+               selected_sensors+=key
+               selected_sensors+=" "
+
     #print(epochtime)
     #print(sensor)
-
     #print(selected_sensors)
-
-    fault= Instructions.query.get(1)
-    graph_1=GraphInfo(Time=epochtime,TimeRange=instructions['GraphInfo']['TimeRange'],
-    sensors=selected_sensors,fault_id=fault.id)
-    db.session.add(graph_1)
-    db.session.commit()
+        
+        fault= Instructions.query.get(Iname.id)
+        graph_1=GraphInfo(Time=epochtime,TimeRange=item['GraphInfo']['TimeRange'],
+        sensors=selected_sensors,fault_id=fault.id)
+        db.session.add(graph_1)
+        db.session.commit()
 
 
 instruction=Instructions.query.first()
-instruction_all=Instructions.query.first()
+instruction_all=Instructions.query.all()
 print(instruction_all)
 fault=Instructions.query.get(instruction.id)
 print(fault.graphinfo)
@@ -107,7 +105,7 @@ def detailgraph(id):
 @app.route('/instructions')
 def instructions():
      name_list=[]
-     instruction=Instructions.query.first()
+     #instruction=Instructions.query.first()
     
      for instruction in Instructions.query.all():
              

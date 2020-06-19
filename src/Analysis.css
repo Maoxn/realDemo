@@ -1,0 +1,44 @@
+.Front {
+  text-align: center;
+}
+
+.Front-logo {
+  height: 10vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .Front-logo {
+    animation: App-logo-spin infinite 10s linear;
+  }
+}
+
+.Front-header {
+  background-color: #303030;
+  min-height: 10vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.Front-link {
+  color: green;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+body{
+  background-image: url("https://pic1.xuehuaimg.com/proxy/baijia/https://f11.baidu.com/it/u=1077337573,2833096387&fm=173&app=25&f=JPEG?w=640&h=360&s=FD2631732F6667200C5D94CB0100E0B3&access=215967316");
+  background-repeat: repeat;
+  background-position: top center;
+}

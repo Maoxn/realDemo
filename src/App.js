@@ -16,6 +16,7 @@ import Fault from './Fault'
 import Fault2 from './Fault2'
 import testReading from './testReading'
 import Testbackend from './testbackend'
+import testClassBackend from './testClassBackend'
 
 class App extends Component {
   render() {
@@ -26,7 +27,7 @@ class App extends Component {
           <Route exact path="/fault" component={Fault} />
           <Route exact path="/fault2" component={Fault2} />
           <Route exact path="/read" component={testReading} />
-          <Route excat path="/backend" component={Testbackend}/>
+          <Route excat path="/backend" component={testClassBackend}/>
           <Route exact path="/404" component={NotFound} />
           <Redirect to="/404" />
         </Switch>

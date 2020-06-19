@@ -109,7 +109,8 @@ def instructions():
     
      for instruction in Instructions.query.all():
              
-         name_list.append({instruction.fault_type:instruction.id})
+         name_list.append({"faultType":instruction.fault_type,
+         "id":instruction.id})
      name_list=json.dumps(name_list)   
 
      return name_list

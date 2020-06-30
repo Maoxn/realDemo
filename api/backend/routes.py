@@ -93,12 +93,12 @@ print(fault.graphinfo)
 def detailgraph(id):
   
      info=GraphInfo.query.get(id)
-     graphinfo={
+     graphinfo=[{
         "id":info.id,
         "Time":info.Time,
         "TimeRange":info.TimeRange,
         "sensors":info.sensors
-     }
+     }]
      return json.dumps(graphinfo) 
         
 

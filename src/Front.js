@@ -7,7 +7,8 @@ import {
   Switch,
   Route,
   Link,
-  Redirect
+  Redirect,
+  withRouter
 } from "react-router-dom";
 
 import Container from 'react-bootstrap/Container'
@@ -91,6 +92,8 @@ class Page extends Component {
   }
 
   render() {
+    var testId = "fault"
+
     return(
       <div>
         <Container fluid>
@@ -156,7 +159,7 @@ class Page extends Component {
                   <Dropdown.Toggle variant="danger" id="dropdown-basic">
                     Faults
                   </Dropdown.Toggle>
-
+                  
                   <Dropdown.Menu>
                     <Dropdown.Item href="#/action-1">
                       <Link to="/fault">4pm - Economizer</Link>
@@ -164,7 +167,9 @@ class Page extends Component {
                     <Dropdown.Item href="#/action-2">
                       <Link to="/fault2">9am - Schedule</Link>
                     </Dropdown.Item>
-                    <Dropdown.Item href="#/action-3">Some more</Dropdown.Item>
+                    <Dropdown.Item href="#/action-3">
+                      <Link to={`/test/${testId}`}>{testId}</Link>
+                    </Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>
                 <Dropdown>
@@ -193,4 +198,4 @@ class Page extends Component {
 
 }
 
-export default Front;
+export default withRouter(Front);

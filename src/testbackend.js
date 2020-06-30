@@ -1,5 +1,6 @@
-import React, { useEffect,useState } from 'react';
+import React, { Component } from 'react';
 import './Fault.css';
+import { Aborter, ServiceURL, ContainerURL, StorageURL, AnonymousCredential } from "@azure/storage-blob";
 
 
 import {
@@ -24,94 +25,87 @@ import Button from 'react-bootstrap/Button'
 accessibility(Highcharts)
 
 
+class RtestBackend extends Component {
+  state = {
+    data: [],
+    isLoading: true
+  }
 
-
-
-function Testbackend() {
-       
-    const[currentTime,setCurrentTime] =useState(0);
-    const[isLoading,setLoading]=useState(true);
-
-
-    useEffect(() => {
-        fetch('/time').then(res => res.json()).then(data => {
-          setCurrentTime(data.time);
-        });
-      }, []);
-
-
- 
-
-
-const loadBackend=()=> {
-    fetch('/time').then(res => res.json()).then(data => {
-        setCurrentTime(data.time);
+  async dataLoader() {
+    const url = 'instructions/'+this.props.selected;
+    await fetch(url)
+      .then(res => res.json())
+      .then(json => {
+        this.setState({
+          data: json,
+          isLoading: false
+        })
       });
-    setLoading(false);
-    
-    // fetch('/time').then(res => res.json()).then(data => {
-    //     setCurrentTime(data.time);
-    //   });
-      console.log({currentTime})
-    
   }
 
-const handleClickDefault = () => {
-      setLoading(true);
-      
-    
+  handleClickDefault() {
+    this.setState({
+      data: [],
+      isLoading: true
+    })
   }
 
+  handleClickLoad() {
+    this.dataLoader();
+    console.log(this.state.data)
+  }
 
- 
-   
-
+  render() {
+    var { data, isLoading } = this.state
     if (!isLoading) {
-    return(
-      <div>
-        <Card bg="Light">
+      return(
+        <div>
+          <Card bg="Light">
             <Card.Header>
-                TESTING Backend
+              TESTING Backend
             </Card.Header>
             <Card.Text>
-                <ul>
-                    <li >
-                        time {currentTime}
-                    </li>
-                </ul>
+              <ul>
+                {data.map((user, index) => (
+                  <li key={index}>
+                    Fault: {user.id}
+                  </li>
+                ))}
+              </ul>
             </Card.Text>
             <Card.Body>
-                <Button variant='success' onClick={() => handleClickDefault()}>default</Button>
-                <Button variant='primary' onClick={() => loadBackend()}>load</Button>
+              <Button variant='success' onClick={() => this.handleClickDefault()}>default</Button>
+              <Button variant='primary' onClick={() => this.handleClickLoad()}>load</Button>
             </Card.Body>
-        </Card>
-        <Link to='/'>
+          </Card>
+          <Link to='/'>
             <Button variant='secondary'>Home</Button>
-        </Link>
-      </div>
-    )
-    } else {
-    return (
-        <div>
-            <Card bg="Light">
-                <Card.Header>
-                    TESTING READING
-                </Card.Header>
-                <Card.Text>
-                    Press load button to see something here
-                </Card.Text>
-                <Card.Body>
-                    <Button variant='success' onClick={() => handleClickDefault()}>default</Button>
-                    <Button variant='primary' onClick={() => loadBackend()}>load</Button>
-                </Card.Body>
-            </Card>
-            <Link to='/'>
-                <Button variant='secondary'>Home</Button>
-            </Link>
+          </Link>
         </div>
-    )
+      )
+    } else {
+      return (
+        <div>
+          <Card bg="Light">
+            <Card.Header>
+              TESTING READING
+            </Card.Header>
+            <Card.Text>
+              Press load button to see something here
+            </Card.Text>
+            <Card.Body>
+              <Button variant='success' onClick={() => this.handleClickDefault()}>default</Button>
+              <Button variant='primary' onClick={() => this.handleClickLoad()}>load</Button>
+            </Card.Body>
+          </Card>
+          <Link to='/'>
+            <Button variant='secondary'>Home</Button>
+          </Link>
+        </div>
+      )
+    }
   }
+
 }
 
-
- export default Testbackend;
+ export default RtestBackend;

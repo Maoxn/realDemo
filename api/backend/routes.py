@@ -118,6 +118,7 @@ for instructions in objectList:
 
 @app.route('/instructions/<id>')
 def detailgraph(id):
+<<<<<<< HEAD
 
      sensor_id=Graphinfo.query.get(1).fault_id
      a=Sensor.query.filter(Sensor.sensors_id==sensor_id).all()
@@ -139,6 +140,18 @@ def detailgraph(id):
      
 
      return json.dumps(graphinfo)
+=======
+  
+     info=GraphInfo.query.get(id)
+     graphinfo=[{
+        "id":info.id,
+        "Time":info.Time,
+        "TimeRange":info.TimeRange,
+        "sensors":info.sensors
+     }]
+     return json.dumps(graphinfo) 
+        
+>>>>>>> 4bd7a28d490111e06e5c6913ef6fbd1cd89314c0
 
 detailgraph(1)
 @app.route('/')

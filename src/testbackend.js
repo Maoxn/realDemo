@@ -31,30 +31,28 @@ function Testbackend() {
        
     const[currentTime,setCurrentTime] =useState(0);
     const[isLoading,setLoading]=useState(true);
+    //const[currentFault,setCurrentFault] =useState(0);
 
+    //useEffect is called after each render and when setState is used inside of it
+    //it will cause the component to re-render which will call useEffect and so on and so on.
+    //called after the first mount/render only.
+    // useEffect(() => {
+    //     fetch('/instructions').then(res => res.json()).then(data => {
+    //      //console.log(data[0].faultType)
+    //       setCurrentFault(data[0].faultType);
 
-    useEffect(() => {
-        fetch('/time').then(res => res.json()).then(data => {
-          setCurrentTime(data.time);
-        });
-      }, []);
-
-
- 
-
+    //     });
+    //   }, []);
 
 const loadBackend=()=> {
-    fetch('/time').then(res => res.json()).then(data => {
-        setCurrentTime(data.time);
+    fetch('/instructions').then(res => res.json()).then(data => {
+        setCurrentTime(data[0].faultType);
+        //console.log(currentTime)
       });
     setLoading(false);
     
-    // fetch('/time').then(res => res.json()).then(data => {
-    //     setCurrentTime(data.time);
-    //   });
-      console.log({currentTime})
-    
-  }
+ 
+   }
 
 const handleClickDefault = () => {
       setLoading(true);
@@ -76,7 +74,7 @@ const handleClickDefault = () => {
             <Card.Text>
                 <ul>
                     <li >
-                        time {currentTime}
+                         {currentTime}
                     </li>
                 </ul>
             </Card.Text>

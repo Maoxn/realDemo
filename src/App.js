@@ -12,10 +12,9 @@ import {
 } from "react-router-dom";
 
 import Front from './Front'
-import Fault from './Fault'
-import Fault2 from './Fault2'
 import testReading from './testReading'
-import Testbackend from './testbackend'
+import RtestBackend from './testBackend'
+import Test from './Test'
 
 class App extends Component {
   render() {
@@ -23,10 +22,13 @@ class App extends Component {
       <Router basename={process.env.PUBLIC_URL}>
         <Switch>
           <Route exact path="/" component={Front} />
-          <Route exact path="/fault" component={Fault} />
-          <Route exact path="/fault2" component={Fault2} />
           <Route exact path="/read" component={testReading} />
-          <Route excat path="/backend" component={Testbackend}/>
+          <Route excat path="/backend" render={(props) => <RtestBackend selected="1"/>} />
+
+          <Route path={`/fault/:id`}>
+            <Test />
+          </Route>
+
           <Route exact path="/404" component={NotFound} />
           <Redirect to="/404" />
         </Switch>

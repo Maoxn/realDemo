@@ -7,7 +7,8 @@ import {
   Switch,
   Route,
   Link,
-  Redirect
+  Redirect,
+  withRouter
 } from "react-router-dom";
 
 import Container from 'react-bootstrap/Container'
@@ -49,7 +50,7 @@ class Front extends Component {
                 <img src="https://tignis.com/wp-content/uploads/2018/08/tignis-logo.png" className="App-logo" alt="logo" />
               </Col>
               <Col xs={8}>
-                <p style={{color: "grey"}}>
+                <p style={{color: "white"}}>
                  WELCOME TO<br/>
                  FAULT DETECTION SYSTEM
                 </p>
@@ -81,7 +82,26 @@ class Front extends Component {
 
 class Page extends Component {
   state = {
-    dataType: "past week"
+    dataType: "past week",
+    data: [],
+    isLoading: true
+  }
+
+  async dataLoader() {
+    const url = 'instructions'
+    await fetch(url)
+      .then(res => res.json())
+      .then(json => {
+        this.setState({
+          data: json,
+          isLoading: false
+        })
+      });
+      console.log(this.state.data[0].id);
+  }
+
+  handleClickLoad() {
+    this.dataLoader();
   }
 
   handleSpan = selectedItem => {
@@ -91,6 +111,7 @@ class Page extends Component {
   }
 
   render() {
+    var {data, isLoading} = this.state
     return(
       <div>
         <Container fluid>
@@ -152,19 +173,17 @@ class Page extends Component {
                 </Card.Body>
               </Card>
               <Jumbotron fluid >
-                <Dropdown>
+                <Dropdown onClick={() => this.handleClickLoad()}>
                   <Dropdown.Toggle variant="danger" id="dropdown-basic">
                     Faults
                   </Dropdown.Toggle>
-
+                  
                   <Dropdown.Menu>
-                    <Dropdown.Item href="#/action-1">
-                      <Link to="/fault">4pm - Economizer</Link>
-                    </Dropdown.Item>
-                    <Dropdown.Item href="#/action-2">
-                      <Link to="/fault2">9am - Schedule</Link>
-                    </Dropdown.Item>
-                    <Dropdown.Item href="#/action-3">Some more</Dropdown.Item>
+                      {data.map((fault, index) => (
+                          <Dropdown.Item>
+                            <Link key={index} to={`/fault/${fault.id}`}>{fault.faultType}</Link>
+                          </Dropdown.Item>
+                       ))}
                   </Dropdown.Menu>
                 </Dropdown>
                 <Dropdown>
@@ -193,4 +212,4 @@ class Page extends Component {
 
 }
 
-export default Front;
+export default withRouter(Front);

@@ -14,7 +14,7 @@
 }
 
 .App-header {
-  background-color: #303030;
+  background-color: #202020;
   min-height: 10vh;
   display: flex;
   flex-direction: column;
@@ -38,7 +38,7 @@
 }
 
 body{
-  background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRyYDnOp-fqhdinz8dU_DvXNONMh_xRRBp74KYiaqBexB--P3wJ&usqp=CAU");
+  background-image: url("https://s3.amazonaws.com/mk-website-media/wp-content/uploads/2018/10/18235758/Wallpaper-Kemra-SoftWhiteBricks-1-1100x1318.jpg");
   background-repeat: repeat;
   background-position: top center;
 }
